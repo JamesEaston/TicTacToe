@@ -32,15 +32,19 @@ class TicTacBoard{
 				if(board[row][col] == 2){
 					output += "O";
 				}
-				if(board[row][col] == 3){
+				if(board[row][col] == 4){
 					output += "|";
 				}
-				if(board[row][col] == 4){
+				if(board[row][col] == 3){
 					output += "-";
 				}
 			}
 			output += "\n";
 		}
 		return output;
+	}
+
+	public int checkWin(){
+		
 	}
 }
