@@ -6,11 +6,13 @@ class TicTacBoard{
 		board = new int[5][5];
 		for(int row = 0; row < board.length; row++){
 			for(int col = 0; col < board.length; col++){
-				if(!(row % 2 == 0)){
+				if(!(row % 2 == 1)){
 					board[row][col] = 3;
+					continue;
 				} 
-				else if(!(col % 2 == 0)){
+				else if(!(col % 2 == 1)){
 					board[row][col] = 4;
+					continue;
 				}
 				else{
 					board[row][col] = 0;
@@ -25,18 +27,22 @@ class TicTacBoard{
 			for(int col = 0; col < board[row].length; col++){
 				if(board[row][col] == 0){
 					output += " ";
+					continue;
 				}
 				if(board[row][col] == 1){
 					output += "X";
+					continue;
 				}
 				if(board[row][col] == 2){
 					output += "O";
+					continue;
 				}
 				if(board[row][col] == 4){
-					output += "|";
+					output += "   | ";
+					continue;
 				}
 				if(board[row][col] == 3){
-					output += "-";
+					output += "---";
 				}
 			}
 			output += "\n";
@@ -74,5 +80,14 @@ class TicTacBoard{
 			return true;
 		}
 		return false;
+	}
+
+	public boolean setMove(int x, int y, int player){
+		if (board[y][x] > 0){
+			return false;
+		} else{
+			board[y][x] = player;
+			return true;
+		}
 	}
 }
