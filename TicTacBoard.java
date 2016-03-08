@@ -1,32 +1,68 @@
 class TicTacBoard{
 
+	//Initializes the board
 	private int[][] board;
 
+	//The method for the constructor of the board
 	public TicTacBoard(){
-		board = new int[5][5];
+		board = new int[6][6];
+		//Loops through the positions in the board and fills them
 		for(int row = 0; row < board.length; row++){
 			for(int col = 0; col < board.length; col++){
-				if(!(row % 2 == 1)){
-					board[row][col] = 3;
-					continue;
-				} 
-				else if(!(col % 2 == 1)){
-					board[row][col] = 4;
-					continue;
-				}
-				else{
-					board[row][col] = 0;
+				//Checks for the first row or column in the array
+				if (row == 0 || col == 0) {
+					//If the index is above a playable column the index is
+					//filled with what is will be decoded as a "C"
+					if((row % 2) == 1){
+						board[row][col] = 5;
+						continue;
+					}
+					//If the index is above a playable row the index is
+					//filled with what is will be decoded as a "R"
+					if((col % 2) == 1){
+						board[row][col] = 6;
+						continue;
+					} else{
+						board[row][col] = 7;
+					}
+				} else {
+				 		if(!(row % 2 == 1)){
+						board[row][col] = 3;
+						continue;
+					} 
+						else if(!(col % 2 == 1)){
+						board[row][col] = 4;
+						continue;
+					}
+					else{
+						board[row][col] = 0;
+					}
 				}
 			}
 		}
 	}
-
+	// Decodes the board to a string that can be printed to the screen
 	public String toString() {
 		String output = "";
 		for(int row = 0; row < board.length; row++){
 			for(int col = 0; col < board[row].length; col++){
+				if(board[row][col] == 3){
+					output += "---";
+				}
 				if(board[row][col] == 0){
 					output += " ";
+					continue;
+				}
+				if(board[row][col] == 5){
+					output += "R" + row;
+					continue;
+				}
+				if(board[row][col] == 6){
+					output += " C" + col+ " ";
+					continue;
+				}
+				if(board[row][col] == 7){
+					output += "  ";
 					continue;
 				}
 				if(board[row][col] == 1){
@@ -40,9 +76,6 @@ class TicTacBoard{
 				if(board[row][col] == 4){
 					output += "   | ";
 					continue;
-				}
-				if(board[row][col] == 3){
-					output += "---";
 				}
 			}
 			output += "\n";
