@@ -10,37 +10,38 @@ class TicTacBoard{
 		for(int row = 0; row < board.length; row++){
 			for(int col = 0; col < board.length; col++){
 				//Checks for the first row or column in the array
-				if (row == 0 || col == 0) {
-					//If the index is above a playable column the index is
-					//filled with what is will be decoded as a "C"
-					if((row % 2) == 1){
-						board[row][col] = 5;
-						continue;
-					}
-					//If the index is above a playable row the index is
-					//filled with what is will be decoded as a "R"
-					if((col % 2) == 1){
-						board[row][col] = 6;
-						continue;
-					} else{
-						board[row][col] = 7;
-					}
-				} else {
-				 		if(!(row % 2 == 1)){
-						board[row][col] = 3;
-						continue;
-					} 
+				 	if (row == 0 || col == 0) {
+						//If the index is above a playable column the index is
+						//filled with what is will be decoded as a "C"
+						if((row % 2) == 1){
+							board[row][col] = 5;
+							continue;
+						}
+						//If the index is above a playable row the index is
+						//filled with what is will be decoded as a "R"
+						if((col % 2) == 1){
+							board[row][col] = 6;
+							continue;
+						}
+						if(col == 0 && (row % 2) == 0){
+							board[row][col] = 7;
+						}
+					} else {
+						if(!(row % 2 == 1)){
+							board[row][col] = 3;
+							continue;
+						} 
 						else if(!(col % 2 == 1)){
-						board[row][col] = 4;
-						continue;
-					}
-					else{
-						board[row][col] = 0;
+							board[row][col] = 4;
+							continue;
+						}
+						else{
+							board[row][col] = 0;
+						}
 					}
 				}
 			}
 		}
-	}
 	// Decodes the board to a string that can be printed to the screen
 	public String toString() {
 		String output = "";
@@ -54,7 +55,7 @@ class TicTacBoard{
 					continue;
 				}
 				if(board[row][col] == 5){
-					output += "R" + row;
+					output += "R" + row + " ";
 					continue;
 				}
 				if(board[row][col] == 6){
@@ -74,7 +75,7 @@ class TicTacBoard{
 					continue;
 				}
 				if(board[row][col] == 4){
-					output += "   | ";
+					output += "  | ";
 					continue;
 				}
 			}
@@ -105,8 +106,10 @@ class TicTacBoard{
 			if (board[i][i] == player){
 				diagCheckOne++;
 			}
-			if (board[board.length - 1][i] == player){
-				diagCheckTwo++;
+			if(i < 5){
+				if (board[board.length - 1 - i][1 + i] == player){
+					diagCheckTwo++;
+				}
 			}
 		}
 		if (diagCheckOne == 3 || diagCheckTwo == 3){
@@ -115,12 +118,11 @@ class TicTacBoard{
 		return false;
 	}
 
-	public boolean setMove(int x, int y, int player){
-		if (board[y][x] > 0){
-			return false;
-		} else{
-			board[y][x] = player;
-			return true;
-		}
+	public boolean checkForValidity(int col, int row){
+		return board[row][col] <= 0;
+	}
+
+	public void setMove(int col, int row, int player){		
+		board[row][col] = player;
 	}
 }
